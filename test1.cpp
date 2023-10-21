@@ -220,7 +220,7 @@ int main()
     Polynomial poly1, poly2;
     int evaluation_num;
 
-    cout << "Enter Polynomial 1 (3 terms, coefficient and exponent):" << endl;
+    cout << "Polynomial 1 :" << endl;
     for (int i = 0; i < 3; i++)
     {
         int coef, exp;
@@ -230,7 +230,7 @@ int main()
         // 這樣輸入的順序才不會影響最後運算的值
     }
 
-    cout << "Enter Polynomial 2 (3 terms, coefficient and exponent):" << endl;
+    cout << "Polynomial 2 :" << endl;
     for (int i = 0; i < 3; i++)
     {
         int coef, exp;
