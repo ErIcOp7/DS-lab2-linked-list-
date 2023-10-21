@@ -16,7 +16,7 @@ struct Term // 每個Term都代表了多項式的一項
     }
 };
 
-class Polynomial
+class Polynomial //建立一個Polynomial class,詳細操作情形請見Ipad
 {
 public:
     Polynomial() // constructor
