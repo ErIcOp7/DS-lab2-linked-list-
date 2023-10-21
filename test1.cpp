@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-// 多項式項的結構 
+// 多項式項的結構
 struct Term // 每個Term都代表了多項式的一項
 {
     int coefficient; // 係數
@@ -16,7 +16,7 @@ struct Term // 每個Term都代表了多項式的一項
     }
 };
 
-class Polynomial //建立一個Polynomial class,詳細操作情形請見Ipad
+class Polynomial // 建立一個Polynomial class,詳細操作情形請見Ipad
 {
 public:
     Polynomial() // constructor
@@ -26,7 +26,8 @@ public:
     // 新增一個多項式（帶有排序功能）
     void addTerm(int coefficient, int exponent)
     {
-        Term *newTerm = new Term(coefficient, exponent);
+        Term *newTerm = new Term(coefficient, exponent); // 動態分配記憶體以創建一個新的多項式項（Term)，並將其地址分配給名為"newTerm"的指標 //動態分配記
+                                                         // 檢查linked lsit的head（頭指標）是否為空，也就是檢查此linked list是否為空
 
         if (head == nullptr || exponent > head->exponent)
         {
@@ -36,38 +37,19 @@ public:
         }
         else
         {
-            Term *current = head;
+            Term *current = head; // 將head指標指向的地址指派給指向term結構的Current指標，從頭開始進行遍歷，找出最後一項的位置（這邊可參考老師講義最後面，有提到要注意的）
 
             while (current->next != nullptr && current->next->exponent >= exponent)
             {
-                current = current->next;
+                current = current->next; // 如果要對指標進行存取,要使用->符號
             }
 
             // 插入新項
             newTerm->next = current->next;
-            current->next = newTerm;
+            current->next = newTerm; // 如果下一項為nullptr，就代表現在到了最後一項
+                                     // 所以把current->next指到剛剛新增的那一項的位置(也就是newTerm的位置)
         }
     }
-
-    //// 新增一個多項式項
-    // void addTerm(int coefficient, int exponent)
-    //{
-    //     Term *newTerm = new Term(coefficient, exponent); // 動態分配記憶體以創建一個新的多項式項（Term)，並將其地址分配給名為"newTerm"的指標 //動態分配記憶體要記得three amigo
-    //     if (head == nullptr)                             // 檢查linked lsit的head（頭指標）是否為空，也就是檢查此linked list是否為空
-    //     {
-    //         head = newTerm; // 如果是空，那我們剛創造（new)出來的newTerm就變成了linked list的第一項
-    //     }
-    //     else
-    //     {
-    //         Term *current = head; // 將head指標指向的地址指派給指向term結構的Current指標，從頭開始進行遍歷，找出最後一項的位置（這邊可參考老師講義最後面，有提到要注意的）
-    //         while (current->next != nullptr)
-    //         {
-    //             current = current->next; // 如果要對指標進行存取,要使用->符號
-    //         }
-    //         current->next = newTerm; // 如果下一項為nullptr，就代表現在到了最後一項
-    //                                  // 所以把current->next指到剛剛新增的那一項的位置(也就是newTerm的位置)
-    //     }
-    // }
 
     // 多項式相加
     Polynomial operator+(const Polynomial &other) const
@@ -267,11 +249,11 @@ int main()
     Polynomial result_of_addition = poly1 + poly2;
     Polynomial result_of_substraction = poly1 - poly2;
     Polynomial result_of_multiplication = poly1 * poly2;
-    cout << "Result of Addition: ";
+    cout << "Addition: ";
     result_of_addition.print();
-    cout << "Result of substraction: ";
+    cout << "Substraction: ";
     result_of_substraction.print();
-    cout << "Result of multiplicaiton: ";
+    cout << "Multiplicaiton: ";
     result_of_multiplication.print();
     cout << "Evaluation of Polynomial 1 at x = " << evaluation_num << " is: " << poly1.evaluation(evaluation_num) << endl;
     cout << "Evaluation of Polynomial 2 at x = " << evaluation_num << " is: " << poly2.evaluation(evaluation_num);
