@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-// 多項式項的結構
+// 多項式項的結構 
 struct Term // 每個Term都代表了多項式的一項
 {
     int coefficient; // 係數
