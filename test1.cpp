@@ -256,7 +256,7 @@ int main()
     cout << "Multiplicaiton: ";
     result_of_multiplication.print();
     cout << "Evaluation of Polynomial 1 at x = " << evaluation_num << " is: " << poly1.evaluation(evaluation_num) << endl;
-    cout << "Evaluation of Polynomial 2 at x = " << evaluation_num << " is: " << poly2.evaluation(evaluation_num);
+    cout << "Evaluation of Polynomial 2 at x = " << evaluation_num << " is: " << poly2.evaluation(evaluation_num) << endl;
 
     return 0;
 }
