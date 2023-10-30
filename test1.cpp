@@ -215,86 +215,31 @@ private:
     Term *head; // 一個指向term結構的指針，名為head
 };
 
-// x的0次方項是否也要打出來（print那邊改 次方 >= 0 的都要顯示出 X^次方）
-int main()
-{
-    Polynomial poly1, poly2;
-    int evaluation_num;
-
-    cout << "Polynomial 1 :" << endl;
-    for (int i = 0; i < 3; i++)
-    {
-        int coef, exp;
-        cin >> coef >> exp;
-        poly1.addTerm(coef, exp);
-        // 可能需要新增一個排序的功能，來讓他們的次方從大到小排序，排序完再進行運算的操作
-        // 這樣輸入的順序才不會影響最後運算的值
-    }
-
-    cout << "Polynomial 2 :" << endl;
-    for (int i = 0; i < 3; i++)
-    {
-        int coef, exp;
-        cin >> coef >> exp;
-        poly2.addTerm(coef, exp);
-    }
-    cout << "x = ";
-    cin >> evaluation_num;
-
-    cout << "Polynomial 1: ";
-    poly1.print();
-
-    cout << "Polynomial 2: ";
-    poly2.print();
-
-    Polynomial result_of_addition = poly1 + poly2;
-    Polynomial result_of_substraction = poly1 - poly2;
-    Polynomial result_of_multiplication = poly1 * poly2;
-    cout << "Addition: ";
-    result_of_addition.print();
-    cout << "Substraction: ";
-    result_of_substraction.print();
-    cout << "Multiplicaiton: ";
-    result_of_multiplication.print();
-    cout << "Evaluation of Polynomial 1 at x = " << evaluation_num << " is: " << poly1.evaluation(evaluation_num) << endl;
-    cout << "Evaluation of Polynomial 2 at x = " << evaluation_num << " is: " << poly2.evaluation(evaluation_num) << endl;
-
-    return 0;
-}
-
-/// 以下為自動讀檔功能///
-// int main(int argc, char *argv[]) {
-//     if (argc != 2) {
-//         cerr << "Usage: " << argv[0] << " <input_filename>" << endl;
-//         return 1;
-//     }
-//
-//     string inputFileName = argv[1];
-//     ifstream inputFile(inputFileName);
-//
-//     if (!inputFile.is_open()) {
-//         cerr << "Failed to open the input file: " << inputFileName << endl;
-//         return 1;
-//     }
-//
+//// x的0次方項是否也要打出來（print那邊改 次方 >= 0 的都要顯示出 X^次方）
+// int main()
+//{
 //     Polynomial poly1, poly2;
-//     string a, b,c;
 //     int evaluation_num;
-//     inputFile >> a;
-//     for (int i = 0; i < 3; i++) {
+//
+//     cout << "Polynomial 1 :" << endl;
+//     for (int i = 0; i < 3; i++)
+//     {
 //         int coef, exp;
-//         inputFile >> coef >> exp;
+//         cin >> coef >> exp;
 //         poly1.addTerm(coef, exp);
+//         // 可能需要新增一個排序的功能，來讓他們的次方從大到小排序，排序完再進行運算的操作
+//         // 這樣輸入的順序才不會影響最後運算的值
 //     }
-//     inputFile >> b;
-//     for (int i = 0; i < 3; i++) {
+//
+//     cout << "Polynomial 2 :" << endl;
+//     for (int i = 0; i < 3; i++)
+//     {
 //         int coef, exp;
-//         inputFile >> coef >> exp;
+//         cin >> coef >> exp;
 //         poly2.addTerm(coef, exp);
 //     }
-//     inputFile >> c;
-//     //cout << "x = ";
-//     inputFile >> evaluation_num;
+//     cout << "x = ";
+//     cin >> evaluation_num;
 //
 //     cout << "Polynomial 1: ";
 //     poly1.print();
@@ -316,3 +261,84 @@ int main()
 //
 //     return 0;
 // }
+
+// 以下為自動讀檔功能///
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        cerr << "Usage: " << argv[0] << " <input_filename>" << endl;
+        return 1;
+    }
+
+    string inputFileName = argv[1];
+    ifstream inputFile(inputFileName);
+
+    if (!inputFile.is_open())
+    {
+        cerr << "Failed to open the input file: " << inputFileName << endl;
+        return 1;
+    }
+
+    Polynomial poly1, poly2;
+    string a, b, c;
+    int evaluation_num;
+    inputFile >> a;
+    if (a == "Poly1")
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int coef, exp;
+            inputFile >> coef >> exp;
+            if (coef == 0 && exp == 0)
+            {
+                break;
+            }
+            else
+            {
+                poly1.addTerm(coef, exp);
+            }
+        }
+    }
+
+    inputFile >> b;
+    if (b == "Poly2")
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int coef, exp;
+            inputFile >> coef >> exp;
+            if (coef == 0 && exp == 0)
+            {
+                break;
+            }
+            else
+            {
+                poly2.addTerm(coef, exp);
+            }
+        }
+    }
+    inputFile >> c;
+    // cout << "x = ";
+    inputFile >> evaluation_num;
+
+    cout << "Polynomial 1: ";
+    poly1.print();
+
+    cout << "Polynomial 2: ";
+    poly2.print();
+
+    Polynomial result_of_addition = poly1 + poly2;
+    Polynomial result_of_substraction = poly1 - poly2;
+    Polynomial result_of_multiplication = poly1 * poly2;
+    cout << "Addition: ";
+    result_of_addition.print();
+    cout << "Substraction: ";
+    result_of_substraction.print();
+    cout << "Multiplicaiton: ";
+    result_of_multiplication.print();
+    cout << "Evaluation of Polynomial 1 at x = " << evaluation_num << " is: " << poly1.evaluation(evaluation_num) << endl;
+    cout << "Evaluation of Polynomial 2 at x = " << evaluation_num << " is: " << poly2.evaluation(evaluation_num) << endl;
+
+    return 0;
+}
